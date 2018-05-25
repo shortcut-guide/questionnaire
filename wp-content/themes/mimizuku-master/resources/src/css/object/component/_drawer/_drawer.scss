@@ -1,0 +1,15 @@
+.#{$_prefix}c-drawer {
+  z-index: 100000;
+
+  &__body {
+    z-index: 100000;
+  }
+
+  &__toggle {
+    @include _transition(transform);
+
+    &[aria-expanded="true"] {
+      transform: rotate(90deg);
+    }
+  }
+}

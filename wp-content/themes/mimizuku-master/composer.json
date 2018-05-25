@@ -1,0 +1,55 @@
+{
+  "type": "wordpress-theme",
+  "license": "GPL-2.0-or-later",
+  "authors": [
+    {
+      "name": "Takashi Kitajima",
+      "email": "inc@2inc.org",
+      "homepage": "https://2inc.org"
+    }
+  ],
+  "require-dev": {
+    "squizlabs/php_codesniffer": "*",
+    "wp-coding-standards/wpcs": "*",
+    "phpmd/phpmd": "2.*",
+    "phpunit/phpunit": "^5.7",
+    "doctrine/instantiator": "1.0.4",
+    "phpunit/php-token-stream": "1.4.11",
+    "phpdocumentor/reflection-docblock": "3.2.2",
+    "symfony/yaml": "3.4.1",
+    "pdepend/pdepend": "2.5.0"
+  },
+  "require": {
+    "php": ">=5.6",
+    "inc2734/mimizuku-core": ">=1.10.6"
+  },
+  "config": {
+    "process-timeout": 0,
+    "vendor-dir": "resources/vendor"
+  },
+  "scripts" :{
+    "test": [
+      "resources/vendor/bin/phpcs --config-set installed_paths resources/vendor/wp-coding-standards/wpcs",
+      "resources/vendor/bin/phpcs -p -s -v -n . --standard=./codesniffer.ruleset.xml --extensions=php",
+      "resources/vendor/bin/phpmd ./ text phpmd.ruleset.xml --suffixes php --exclude /resources/vendor/,/tests/",
+      "bash bin/phpunit.sh"
+    ],
+    "server": "bash bin/server.sh",
+    "scaffold-tests": "bash bin/scaffold-tests.sh",
+    "theme-unit-test": "bash bin/theme-unit-test.sh",
+    "theme-unit-test-ja": "bash bin/theme-unit-test-ja.sh",
+    "wpphpunit": "bash bin/wpphpunit.sh",
+    "phpunit": "bash bin/phpunit.sh",
+    "post-install-cmd": [
+      "yarn run gulp build"
+    ],
+    "post-update-cmd": [
+      "composer run post-install-cmd"
+    ]
+  },
+  "autoload": {
+    "psr-4": {
+      "Mimizuku\\": ""
+    }
+  }
+}

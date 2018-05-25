@@ -1,0 +1,5 @@
+.#{$_prefix}c-entry {
+  &__content {
+    @include entry-content();
+  }
+}
